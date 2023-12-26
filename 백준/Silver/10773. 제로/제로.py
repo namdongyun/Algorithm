@@ -17,8 +17,4 @@ for i in range(K):
     else:
         stack.append(command)
 
-sumNum = 0
-for i in range(len(stack)):
-    sumNum += stack[i]
-
-print(sumNum)
+print(sum(stack))
