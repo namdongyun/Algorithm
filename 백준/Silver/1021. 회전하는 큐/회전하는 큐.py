@@ -1,0 +1,28 @@
+import sys
+from collections import deque
+
+input = sys.stdin.readline
+
+N, M = map(int, input().split())    # 큐의 크기 N,  뽑아내려고 하는 수의 개수 M
+
+dq = deque([i for i in range(1, N+1)]) # deque 생성
+
+positionList = list(map(int, input().split()))   # 뽑아내려고 하는 수의 위치
+
+count = 0
+
+for i in positionList:
+    while True:
+        if dq[0] == i:
+            dq.popleft()
+            break
+        else:
+            if dq.index(i) <= len(dq)/2:
+                while dq[0] != i:
+                    dq.rotate(-1)
+                    count += 1
+            else:
+                while dq[0] != i:
+                    dq.rotate(1)
+                    count += 1
+print(count)
