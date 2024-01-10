@@ -38,8 +38,8 @@ def solution():
 
     if stack:
         return 0
-    
-    return result
+    else:
+        return result
 
 
 print(solution())
