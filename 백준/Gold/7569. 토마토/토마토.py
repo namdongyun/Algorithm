@@ -41,7 +41,8 @@ for z in range(H):     # 탐색해서 익은 토마토들을 찾음
         for x in range(M):
             if graph[z][y][x] == 0:
                 flag = False
-                break
+                print(-1)
+                exit()
             else:
                 result = max(result, graph[z][y][x]-1)
 
