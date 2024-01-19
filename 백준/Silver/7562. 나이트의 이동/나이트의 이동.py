@@ -40,4 +40,4 @@ for _ in range(testCase):
     graph = [[0 for _ in range(l)] for _ in range(l)]
     graph[cPoY][cPoX] = 1   # 나이트의 현재 위치 좌표에 1값을 넣음
 
-    print(bfs() - 1)
+    print(bfs() - 1)    # 나이트의 처음 위치 값이 1이였으므로 1을 빼주면 이동 횟수
