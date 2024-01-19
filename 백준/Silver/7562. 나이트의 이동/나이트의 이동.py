@@ -9,10 +9,7 @@ dy = [1, 1, 2, 2, -1, -1, -2, -2]
 dx = [2, -2, 1, -1, 2, -2, 1, -1]
 
 
-def bfs(cPoY, cPoX):
-    dq = deque()
-    dq.append((cPoY, cPoX))     # 나이트의 현재 위치 넣어줌
-
+def bfs():
     while dq:
         y, x = dq.popleft()     # 나이트의 현재 위치 추출
 
@@ -28,20 +25,19 @@ def bfs(cPoY, cPoX):
                     return graph[ny][nx]
         
 
-
 for _ in range(testCase):
     l = int(input())    # 한 변의 길이
     cPoY, cPoX = map(int, input().split())  # 나이트가 현재 있는 칸
     dPoY, dPoX = map(int, input().split())  # 나이트가 이동하려고 하는 칸
 
-    if cPoY == dPoY and cPoX == dPoX:
+    if cPoY == dPoY and cPoX == dPoX:      # 나이트의 현재 위치 == 이동하려는 위치면 0 출력 후 continue
         print(0)
         continue
+
+    dq = deque()
+    dq.append((cPoY, cPoX))     # 나이트의 현재 위치 넣어줌
 
     graph = [[0 for _ in range(l)] for _ in range(l)]
     graph[cPoY][cPoX] = 1   # 나이트의 현재 위치 좌표에 1값을 넣음
 
-    print(bfs(cPoY, cPoX) - 1)
-
-
-
+    print(bfs() - 1)
