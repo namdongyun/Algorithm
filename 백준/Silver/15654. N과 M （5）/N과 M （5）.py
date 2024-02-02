@@ -10,16 +10,16 @@ numList.sort()
 
 s = []
 
-def solution(dq):
+def solution():
     if len(s) == M:
         print(' '.join(map(str, s)))
         return
 
-    for i in dq:
-        s.append(i)
-        dq2 = deque(dq)
-        dq2.remove(i)
-        solution(dq2)
+    for i in range(N):
+        if numList[i] in s:
+            continue
+        s.append(numList[i])
+        solution()
         s.pop()
 
-solution(numList)
+solution()
