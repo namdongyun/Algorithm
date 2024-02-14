@@ -1,61 +1,68 @@
-# bfs로 7명의 여학생이 붙어있는지 확인한다.
-def dfs_2(visited, r, c):
+import sys
+
+input = sys.stdin.readline
+
+
+def check_solution(visited, y, x):    # 7명의 학생이 붙어있는지 확인
     global check
-    global count_temp
+    global student_count    # 붙어있는 학생 수
 
-    if r < 0 or r >= 5 or c < 0 or c >= 5:
+    visited[y][x] = False
+    student_count += 1    # 학생 카운트 +1
+
+    if student_count == 7:    # 학생 카운트가 7일 경우 7명 학생이 서로 붙어있으므로 check True
+        check = True
         return
-
-    if visited[r][c] == 0:  # 만약 여학생 위치라면
-        visited[r][c] = 1  # 그 값을 1로 변경한 후
-        count_temp += 1  # 붙어있는 학생수 +1
-    else:
-        return
-
-    if count_temp == 7:  # 만약 7명이 붙어있다면
-        check = True  # check 변경
-        return
-
-    dr = [-1, +1, 0, 0]  # 상하좌우
-    dc = [0, 0, -1, +1]  # 상하좌우
 
     for i in range(4):
-        dfs_2(visited, r + dr[i], c + dc[i])
+        ny = y + dy[i]
+        nx = x + dx[i]
+
+        if ny < 0 or ny >= 5 or nx < 0 or nx >= 5:  # 좌표를 벗어난 경우 continue
+            continue
+        if not visited[ny][nx]:     # 학생이 없는 좌표인 경우 continue
+            continue
+
+        check_solution(visited, ny, nx)
 
 
-def dfs(depth, start, count):
-    global result
+def dfs(start, y_count, depth):
     global check
-    global count_temp
+    global result
+    global student_count
 
-    if count >= 4:  # 만약 임도연파가 4명이상이라면
-        return  # 재귀 탈출
+    if y_count >= 4:    # 임도연파가 4이상이면 반환
+        return
 
-    if depth == 7:  # 7명을 뽑았다면
-        # 7명 여학생 위치 방문처리를 위한 리스트 1로 처리
-        visited = [[1] * 5 for _ in range(5)]
-        for i in arr:  # 여학생 위치 0으로 초기화
-            visited[i[0]][i[1]] = 0
+    if depth == 7:  # 7명 뽑았으면
+        visited = [[False] * 5 for _ in range(5)]
+        for i in arr:
+            visited[i[0]][i[1]] = True
 
-        dfs_2(visited, arr[0][0], arr[0][1])  # 여학생들이 붙어있는지 체킹
+        check_solution(visited, arr[0][0], arr[0][1])
         if check:
-            result += 1  # 횟수 1번 추가
-            check = False
-        count_temp = 0
+            check = False   # check 초기화
+            result += 1
+            
+        student_count = 0   # 붙어있는 학생 수 초기화
         return
 
     for i in range(start, 25):
-        r = i // 5  # 총 25번 중 행은 i 나누기 5와 같다.
-        c = i % 5  # 총 25번 중 열은 i를 5로 나눈 나머지와 같다.
-        arr.append((r, c))  # 해당 위치를 추가
-        dfs(depth + 1, i + 1, count + (students[r][c] == 'Y'))  # 재귀 돈다.
-        arr.pop()  # 해당 위치를 제거
+        y = i // 5   # y 좌표
+        x = i % 5    # x 좌표
+        arr.append((y, x))    # 탐색 좌표 추가
+        dfs(i + 1, y_count + (graph[y][x] == 'Y'), depth + 1)
+        arr.pop()   # 탐색 후 제거
 
 
-students = [list(input()) for _ in range(5)]
+graph = [list(input().rstrip()) for _ in range(5)]
 arr = []
+
+dy = [0, 0, 1, -1]
+dx = [1, -1, 0, 0]
+
+check = False
+student_count = 0   # 붙어있는 학생 수
 result = 0
-check = False  # 7명이 붙어있는지 여부
-count_temp = 0  # 몇명이 붙어있는지 확인
 dfs(0, 0, 0)
 print(result)
