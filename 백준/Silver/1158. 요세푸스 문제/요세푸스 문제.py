@@ -2,7 +2,7 @@ import sys
 
 input = sys.stdin.readline
 
-N, K = map(int, input().split())
+N, K = map(int, input().split())    # 7, 3
 
 result = []
 arr = [i for i in range(1, N+1)]
