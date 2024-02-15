@@ -12,7 +12,7 @@ length_min = 99999
 length_sum = 0
 
 
-def home_count():
+def home_count():   # graph 에서 1(집)을 찾아서 home_position에 모든 집 좌표 추가
     global home_position
 
     for i in range(N):
