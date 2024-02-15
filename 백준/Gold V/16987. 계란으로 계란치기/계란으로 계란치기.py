@@ -20,7 +20,7 @@ def solution(start):
         count = max(count, brokenEgg)   # 기존 count 값과 brokenEgg중 큰 수를 저장
         return
 
-    if eggGraph[start][0] <= 0:     # 계란이 깨져있으면 다음 계란으로
+    if eggGraph[start][0] <= 0:     # 들고 있는 계란이 깨져있으면 다음 계란으로
         solution(start + 1)
         return
 
@@ -32,15 +32,13 @@ def solution(start):
             isAllBroken = False
             break
 
-    if isAllBroken:
+    if isAllBroken:     # 들고 있는 계란 이외에 모두 깨져있는 경우
         count = max(count, N-1)
         return
 
     for i in range(N):
         if i == start:
             continue
-        if eggGraph[start][0] <= 0:     # 들고 있는 계란이 깨졌을 경우
-            break
         if eggGraph[i][0] <= 0:     # 칠 계란이 깨져 있는 경우
             continue
 
