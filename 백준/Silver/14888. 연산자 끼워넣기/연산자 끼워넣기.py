@@ -31,9 +31,9 @@ def solution(depth, result):
             elif j == 2:
                 current_result = result * numList[depth]
             elif j == 3:
-                if result < 0:
-                    result = abs(result)
-                    current_result = -(result // numList[depth])
+                if result < 0:  # result 값이 음수이면 양수로 변환
+                    result = -result
+                    current_result = -(result // numList[depth])    # 나눈 뒤 다시 음수로 변환
                 else:
                     current_result = (result // numList[depth])
 
