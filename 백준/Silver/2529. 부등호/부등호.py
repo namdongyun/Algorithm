@@ -18,7 +18,7 @@ def solution(currentNum, depth):
         number = "".join(str(n) for n in s)    # s 배열의 숫자들을 문자열로 변환하고 결합
         if int(maxNum) < int(number):
             maxNum = number
-        if int(minNum) > int(number):
+        if int(minNum) > int(number):   # 021 처럼 앞에 0을 출력해야해서 str형태로 저장함
             minNum = number
         return
 
