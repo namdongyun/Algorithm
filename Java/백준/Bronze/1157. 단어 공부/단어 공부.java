@@ -9,8 +9,8 @@ public class Main {
         // 입력한 단어 받기
         String str = br.readLine();
 
-        int max = 0;
-        int count = 0;
+        int max = -1;
+        char ch = '?';
 
         // 입력한 글자 하나씩 해당 아스키 코드 값 - 'a' or 'A' 하여 int 배열에 추가
         int[] result = new int[26];
@@ -25,17 +25,13 @@ public class Main {
         
         // result 배열에서 max 값 찾기
         for (int j=0; j<result.length; j++) {
-            if (result[max] < result[j]) max = j;
+            if (max < result[j]) {
+                max = result[j];
+                ch = (char)(j + 'A');
+            } else if (max == result[j]) {
+                ch = '?';
+            }
         }
-
-        for (int k=0; k<result.length; k++) {
-            if (result[max] == result[k]) count++;
-        }
-
-        if (count > 1) {
-            System.out.print("?");  // max 값 여러개 일 경우 ? 출력
-        } else {
-            System.out.println((char) (max + 'A')); // 대문자 max 값 철자 출력
-        }
+        System.out.println(ch); // 대문자 max 값 철자 출력
     }
 }
